@@ -1,7 +1,9 @@
+import HomePosts from './homePosts';
+
 const Home = () => {
   return (
     <>
-      <h1>Home</h1>
+      <HomePosts />
     </>
   );
 };
