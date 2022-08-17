@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPosts } from '../thunks/thunks';
+import { fetchPosts, fetchPostById } from '../thunks/thunks';
 
 export const postsSlice = createSlice({
   name: 'posts',
@@ -20,6 +20,16 @@ export const postsSlice = createSlice({
         state.articles = action.payload;
       })
       .addCase(fetchPosts.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchPostById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPostById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.postById = action.payload;
+      })
+      .addCase(fetchPostById.rejected, (state) => {
         state.loading = false;
       });
   },
