@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { addToNewsletter } from '../../store/thunks/thunks';
+import { clearNewsletter } from '../../store/reducers/users';
 
 import { showToast } from './tool';
 
@@ -23,6 +24,7 @@ const Newsletter = () => {
         } else {
           showToast('ERROR', 'Oh no...  you are there already');
         }
+        dispatch(clearNewsletter({}));
       });
   };
 

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { fetchPostById } from '../../store/thunks/thunks';
+import { clearPostById } from '../../store/reducers/posts';
+import Newsletter from '../utils/newsletter';
 
 import { Spinner } from 'react-bootstrap';
 
@@ -13,6 +15,13 @@ const PostComponent = () => {
 
   useEffect(() => {
     dispatch(fetchPostById(params.id));
+  }, []);
+
+  // clearing previous post prevents the flashing on load of next page
+  useEffect(() => {
+    return () => {
+      dispatch(clearPostById());
+    };
   }, []);
 
   return (
@@ -43,6 +52,7 @@ const PostComponent = () => {
           </Spinner>
         </div>
       ) : null}
+      <Newsletter />
     </>
   );
 };
