@@ -217,20 +217,22 @@
     {
       "email": "mot3@motman.com",
       "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "email": "mot4@motman.com",
-      "id": 8
     }
   ],
-  "contact": []
+  "contact": [
+    {
+      "email": "mot@motman4.com",
+      "firstname": "Moot",
+      "lastname": "MotMoot",
+      "message": "Hello",
+      "id": 1
+    },
+    {
+      "email": "moo@mooman.com",
+      "firstname": "Moo",
+      "lastname": "MooooPare",
+      "message": "Moooo Pare!",
+      "id": 2
+    }
+  ]
 }

@@ -4,20 +4,33 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Alert } from 'react-bootstrap';
 
+import { sendMessage } from '../../store/thunks/thunks';
+import { showToast } from '../utils/tool';
+
 const Contact = () => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: { email: '', firstname: '', lastname: '', message: '' },
     validationSchema: Yup.object({
-      email: Yup.string().required('sorry the is required'),
-      firstname: Yup.string().required('sorry the name is required'),
-      lastname: Yup.string().required('Sorry the last name is required'),
+      email: Yup.string().required('Sorry an email is required'),
+      firstname: Yup.string().required('Sorry your name is required'),
+      lastname: Yup.string().required('Sorry a last name is required'),
       message: Yup.string()
-        .required('Sorry the message is required')
+        .required('Sorry, you need to have a message.')
         .max(500, 'Sorry the message is too long'),
     }),
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
+      dispatch(sendMessage(values))
+        .unwrap()
+        .then((response) => {
+          if (response) {
+            resetForm();
+            showToast('Success', 'Thank you, we will contact you back');
+          }
+        })
+        .catch((err) => {
+          showToast('Error', 'Sowee, try again later');
+        });
     },
   });
 
